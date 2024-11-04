@@ -7,7 +7,7 @@ ENV UBSAN_OPTIONS=print_stacktrace=1:print_summary=1:halt_on_error=1
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # install common system packages
-RUN apt-get update && apt-get install -y git make sudo wget curl build-essential python lsb-release software-properties-common python3-jinja2 gperf nano libcap-dev pkg-config libgtk-3-dev libglib2.0-dev libmount-dev
+RUN apt-get update && apt-get install -y meson git make sudo wget curl build-essential python lsb-release software-properties-common python3-jinja2 gperf nano libcap-dev pkg-config libgtk-3-dev libglib2.0-dev libmount-dev
 
 # install clang version 14
 RUN wget https://apt.llvm.org/llvm.sh && chmod +x llvm.sh && sudo ./llvm.sh 14
@@ -27,6 +27,6 @@ RUN apt-get install -y libclang-rt-14-dev
 RUN mkdir /home/fuzz
 WORKDIR /home/fuzz
 
-RUN git clone https://github.com/systemd/systemd.git && git checkout v249.12
+RUN git clone https://github.com/systemd/systemd.git && cd systemd &&  git checkout v249.12
 
 ENTRYPOINT /bin/bash

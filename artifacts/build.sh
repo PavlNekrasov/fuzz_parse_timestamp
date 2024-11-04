@@ -6,11 +6,12 @@ SOURCE_FILE="fuzzer.c"
 
 cd "$SYSTEMD_DIR"
 
-CC=clang CXX=clang++ meson setup "$BUILD_DIR" -Dllvm-fuzz=true -Db_sanitize=address,undefined -Db_lundef=false
-
+CC=clang CXX=clang++ meson setup "$BUILD_DIR"  -Dllvm-fuzz=true -Db_sanitize=address,undefined -Db_lundef=false
 cd "$BUILD_DIR" && ninja
 
-cd /home/fuzz
+cd /home/fuzz/artifacts
+mv "$SOURCE_FILE" ./../
+cd ./..
 mkdir corpus
 
 
